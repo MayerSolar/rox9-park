@@ -26,7 +26,6 @@
   .rox-scroll::-webkit-scrollbar{height:6px}
   .rox-scroll::-webkit-scrollbar-thumb{background:#2a2a2c;border-radius:20px}
 
-  /* menu button */
   #rox-logo{opacity:0;animation:rox-fd .9s cubic-bezier(.2,.7,.2,1) .15s forwards}
   #rox-menu-btn{opacity:0;animation:rox-fade .9s ease .32s forwards}
   #rox-menu-btn:hover{transform:scale(1.07);border-color:rgba(201,162,74,.6);background:rgba(11,11,12,.65)}
@@ -37,9 +36,11 @@
   #rox-menu-btn[data-open="1"] .rox-burger span:nth-child(1){top:6px;transform:rotate(45deg)}
   #rox-menu-btn[data-open="1"] .rox-burger span:nth-child(2){bottom:6px;transform:rotate(-45deg)}
 
-  /* full-screen menu */
   .rox-menu-link:hover{color:#E4C67E !important;transform:translateX(10px) !important}
   .rox-menu-link:hover .rox-menu-num{opacity:1 !important}
+
+  .rox-chip:hover{border-color:rgba(201,162,74,.65) !important;background:rgba(201,162,74,.08) !important;transform:translateY(-2px)}
+  .rox-cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px -10px rgba(201,162,74,.55)}
 
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -50,7 +51,7 @@
 <div style="position:relative;width:100%;overflow:hidden">
 
   <header id="rox-header" style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);transition:background .4s ease,padding .4s ease,border-color .4s ease;border-bottom:1px solid rgba(255,255,255,0)">
-    <img id="rox-logo" src="assets/rox9-logo-gold.png" alt="ROX9 Park" style="height:clamp(30px,5vw,40px);width:auto;display:block">
+    <img id="rox-logo" src="assets/rox9-logo-gold.png" alt="ROX" style="height:clamp(30px,5vw,40px);width:auto;display:block">
   </header>
 
   <!-- MENU BUTTON -->
@@ -61,32 +62,32 @@
   <!-- FULL-SCREEN MENU -->
   <div id="rox-menu" style="position:fixed;inset:0;z-index:110;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .55s cubic-bezier(.2,.7,.2,1);background:rgba(9,9,10,.94);backdrop-filter:blur(22px) saturate(120%);-webkit-backdrop-filter:blur(22px) saturate(120%);display:flex;flex-direction:column;justify-content:center;gap:clamp(30px,6vh,58px);padding:clamp(96px,14vh,140px) clamp(28px,7vw,90px) clamp(40px,7vh,70px)">
     <nav style="display:flex;flex-direction:column;gap:clamp(4px,1.1vh,10px);width:100%;max-width:1180px;margin:0 auto">
-      <a class="rox-menu-link" href="#top" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.1rem,9vw,4.8rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">01</span>Home</a>
-      <a class="rox-menu-link" href="#idea" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.1rem,9vw,4.8rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">02</span>The Idea</a>
-      <a class="rox-menu-link" href="#explore" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.1rem,9vw,4.8rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">03</span>Explore</a>
-      <a class="rox-menu-link" href="#gallery" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.1rem,9vw,4.8rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">04</span>First Look</a>
-      <a class="rox-menu-link" href="#contact" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.1rem,9vw,4.8rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">05</span>Contact</a>
+      <a class="rox-menu-link" href="#top" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2rem,8vw,4.4rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">01</span>Home</a>
+      <a class="rox-menu-link" href="#rox-park" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2rem,8vw,4.4rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">02</span>ROX Park</a>
+      <a class="rox-menu-link" href="#waves" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2rem,8vw,4.4rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">03</span>WAVES</a>
+      <a class="rox-menu-link" href="#partners" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2rem,8vw,4.4rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">04</span>Partners</a>
+      <a class="rox-menu-link" href="#contact" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2rem,8vw,4.4rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">05</span>Contact</a>
     </nav>
     <div style="width:100%;max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.08);padding-top:clamp(20px,4vh,32px)">
-      <span style="font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:{{ accent }};font-weight:600">Opening {{ launchLabel }}</span>
+      <span style="font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:{{ accent }};font-weight:600">Destinations across Syria</span>
       <a href="https://www.rox9park.com" style="font-size:.92rem;color:#C7C2B6;letter-spacing:.02em">www.rox9park.com</a>
     </div>
   </div>
 
-  <!-- HERO -->
-  <section id="top" style="position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(96px,16vh,150px) clamp(20px,5vw,64px) clamp(40px,7vh,80px);scroll-margin-top:0">
+  <!-- HERO (brand) -->
+  <section id="top" style="position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(96px,16vh,150px) clamp(20px,5vw,64px) clamp(40px,7vh,80px)">
     <div style="position:absolute;inset:0;z-index:0;overflow:hidden">
-      <div style="position:absolute;inset:0;background-image:url('{{ heroImg }}');background-size:cover;background-position:center;animation:rox-kb 22s ease-in-out infinite alternate"></div>
+      <div style="position:absolute;inset:0;background-image:url('assets/hero-dusk.jpg');background-size:cover;background-position:center;animation:rox-kb 22s ease-in-out infinite alternate"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.55) 0%,rgba(11,11,12,.15) 32%,rgba(11,11,12,.55) 62%,rgba(11,11,12,.96) 100%)"></div>
       <div style="position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 20%,transparent 40%,rgba(11,11,12,.5) 100%)"></div>
     </div>
-    <div style="position:relative;z-index:2;max-width:1000px">
+    <div style="position:relative;z-index:2;max-width:1040px">
       <h1 data-reveal data-d="120" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2.6rem,8.5vw,6rem);line-height:.98;letter-spacing:-.025em;color:#F7F5EF;text-wrap:balance">Something<br>extraordinary is<br>taking shape.</h1>
-      <div data-reveal data-d="250" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:24px;font-size:clamp(.64rem,2.4vw,.78rem);letter-spacing:.34em;text-transform:uppercase;color:{{ accent }};font-weight:600">Retail · Dining · Entertainment</div>
-      <p data-reveal data-d="380" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:22px;max-width:560px;font-size:clamp(1rem,3.4vw,1.2rem);line-height:1.6;color:#C7C2B6;font-weight:400">A new mixed-use destination where retail, dining, entertainment, living and workspace all come together around one simple idea. <span style="color:#EDEAE2;font-weight:600">Return on eXperience.</span></p>
-      <div data-reveal data-d="500" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:38px;display:flex;align-items:center;gap:14px">
-        <span style="width:34px;height:1px;background:{{ accent }}"></span>
-        <span style="font-size:clamp(.62rem,2.4vw,.75rem);letter-spacing:.28em;text-transform:uppercase;color:#8C877B;font-weight:600">Opening {{ launchLabel }}</span>
+      <div data-reveal data-d="250" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:24px;font-size:clamp(.64rem,2.4vw,.78rem);letter-spacing:.34em;text-transform:uppercase;color:{{ accent }};font-weight:600">Retail · Dining · Waterfront</div>
+      <p data-reveal data-d="380" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:22px;max-width:600px;font-size:clamp(1rem,3.4vw,1.2rem);line-height:1.6;color:#C7C2B6;font-weight:400">ROX creates destinations across Syria where retail, dining and entertainment come together around one idea. <span style="color:#EDEAE2;font-weight:600">Return on Xperience.</span></p>
+      <div data-reveal data-d="500" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:36px;display:flex;flex-wrap:wrap;gap:12px">
+        <a class="rox-chip" href="#rox-park" style="display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:100px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);transition:transform .3s,border-color .3s,background .3s;font-size:.82rem;color:#EDEAE2;font-weight:600;letter-spacing:.02em">ROX Park <span style="color:{{ accent }};font-size:.72rem;letter-spacing:.14em;text-transform:uppercase">Summer 2027</span></a>
+        <a class="rox-chip" href="#waves" style="display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:100px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);transition:transform .3s,border-color .3s,background .3s;font-size:.82rem;color:#EDEAE2;font-weight:600;letter-spacing:.02em">WAVES <span style="color:{{ accent }};font-size:.72rem;letter-spacing:.14em;text-transform:uppercase">Tartus · Now</span></a>
       </div>
     </div>
     <div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;animation:rox-cue 2s ease-in-out infinite">
@@ -95,11 +96,23 @@
     </div>
   </section>
 
-  <!-- COUNTDOWN -->
+  <!-- ================= PROJECT 01 — ROX PARK ================= -->
+  <section id="rox-park" style="padding:clamp(64px,11vw,130px) clamp(20px,5vw,64px) clamp(30px,5vw,60px);border-top:1px solid rgba(255,255,255,.06);scroll-margin-top:70px">
+    <div style="max-width:1240px;margin:0 auto">
+      <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);display:flex;flex-wrap:wrap;align-items:baseline;gap:16px;margin-bottom:26px">
+        <span style="font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:700">Project 01</span>
+        <span style="font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:#8C877B;font-weight:600">Opening {{ launchLabel }}</span>
+      </div>
+      <h2 data-reveal data-d="110" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2.4rem,7vw,4.6rem);line-height:1;letter-spacing:-.025em;color:#F7F5EF">ROX Park</h2>
+      <p data-reveal data-d="220" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:24px;max-width:720px;font-size:clamp(1.02rem,2.6vw,1.25rem);line-height:1.7;color:#B7B2A6">A mixed-use destination designed around the moments people actually remember. Curated retail, chef-driven dining, culture and entertainment, alongside living and workspace. A walkable, design-led neighborhood built to be lived in, not just visited.</p>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN (ROX Park) -->
   <sc-if value="{{ showCountdown }}" hint-placeholder-val="{{ true }}">
-  <section style="padding:clamp(56px,9vw,96px) clamp(20px,5vw,64px);border-top:1px solid rgba(255,255,255,.06)">
+  <section style="padding:clamp(30px,5vw,50px) clamp(20px,5vw,64px) clamp(56px,9vw,90px)">
     <div data-reveal style="opacity:0;transform:translateY(24px);filter:blur(7px);max-width:1120px;margin:0 auto;text-align:center">
-      <div style="font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:28px">Opening {{ launchLabel }}</div>
+      <div style="font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:28px">ROX Park opens {{ launchLabel }}</div>
       <div style="display:flex;justify-content:center;gap:clamp(18px,6vw,64px)">
         <sc-for list="{{ countdownUnits }}" as="u" hint-placeholder-count="4">
           <div style="display:flex;flex-direction:column;align-items:center">
@@ -112,17 +125,8 @@
   </section>
   </sc-if>
 
-  <!-- MANIFESTO -->
-  <section id="idea" style="padding:clamp(64px,11vw,140px) clamp(20px,5vw,64px);border-top:1px solid rgba(255,255,255,.06);scroll-margin-top:80px">
-    <div style="max-width:920px;margin:0 auto">
-      <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:30px">The idea</div>
-      <h2 data-reveal data-d="120" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.8rem,5.4vw,3.4rem);line-height:1.12;letter-spacing:-.02em;color:#F7F5EF;text-wrap:balance">Return on <span style="color:{{ accent }}">eXperience.</span> A place designed around the moments people actually remember.</h2>
-      <p data-reveal data-d="240" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:28px;font-size:clamp(1.02rem,2.6vw,1.25rem);line-height:1.7;color:#B7B2A6;max-width:680px">ROX9 Park brings together curated retail, chef-driven dining, culture and entertainment, alongside living and workspace. A walkable, design-led neighborhood built to be lived in, not just visited.</p>
-    </div>
-  </section>
-
-  <!-- CATEGORIES -->
-  <section id="explore" style="padding:0 clamp(20px,5vw,64px) clamp(64px,10vw,120px);scroll-margin-top:80px">
+  <!-- ROX PARK CATEGORIES -->
+  <section style="padding:0 clamp(20px,5vw,64px) clamp(64px,10vw,120px)">
     <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(14px,2vw,22px)">
       <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="4">
         <div data-reveal style="opacity:0;transform:translateY(24px);filter:blur(7px);position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;cursor:default">
@@ -138,11 +142,11 @@
     </div>
   </section>
 
-  <!-- GALLERY -->
-  <section id="gallery" style="padding:clamp(56px,9vw,110px) 0;border-top:1px solid rgba(255,255,255,.06);scroll-margin-top:80px">
+  <!-- ROX PARK GALLERY -->
+  <section style="padding:0 0 clamp(64px,10vw,110px)">
     <div style="padding:0 clamp(20px,5vw,64px);max-width:1240px;margin:0 auto 34px">
-      <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:14px">First look</div>
-      <h2 data-reveal data-d="120" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.6rem,4.6vw,2.8rem);letter-spacing:-.02em;color:#F7F5EF">A glimpse of what is coming.</h2>
+      <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:14px">First look — ROX Park</div>
+      <h3 data-reveal data-d="120" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.6rem,4.6vw,2.8rem);letter-spacing:-.02em;color:#F7F5EF">A glimpse of what is coming.</h3>
     </div>
     <div class="rox-scroll" style="display:flex;gap:16px;overflow-x:auto;padding:6px clamp(20px,5vw,64px) 20px;scroll-snap-type:x mandatory">
       <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4">
@@ -151,34 +155,102 @@
     </div>
   </section>
 
-  <!-- FINAL CTA -->
-  <section style="padding:clamp(72px,12vw,150px) clamp(20px,5vw,64px);border-top:1px solid rgba(255,255,255,.06);text-align:center">
-    <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);max-width:760px;margin:0 auto">
-      <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2rem,6.5vw,4rem);line-height:1.04;letter-spacing:-.025em;color:#F7F5EF;text-wrap:balance">Be part of what is next.</h2>
-      <p style="margin-top:20px;font-size:clamp(1rem,2.6vw,1.18rem);color:#B7B2A6;line-height:1.6">A new mixed-use destination for retail, dining and entertainment. Opening {{ launchLabel }}.</p>
-      <div style="display:inline-flex;align-items:center;gap:14px;margin-top:34px">
-        <span style="width:34px;height:1px;background:{{ accent }}"></span>
-        <span style="font-family:'Sora',sans-serif;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:{{ accent }};font-size:.8rem">Return on eXperience</span>
-        <span style="width:34px;height:1px;background:{{ accent }}"></span>
+  <!-- ================= PROJECT 02 — WAVES BY ROX ================= -->
+  <section id="waves" style="scroll-margin-top:70px">
+    <!-- WAVES feature -->
+    <div style="position:relative;min-height:clamp(70svh,80vh,88svh);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(70px,12vh,120px) clamp(20px,5vw,64px) clamp(40px,7vh,70px);overflow:hidden">
+      <div style="position:absolute;inset:0;z-index:0">
+        <div style="position:absolute;inset:0;background-image:url('assets/waves-hero.jpg');background-size:cover;background-position:center"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.5) 0%,rgba(11,11,12,.12) 34%,rgba(11,11,12,.55) 68%,rgba(11,11,12,.96) 100%)"></div>
+      </div>
+      <div style="position:relative;z-index:2;max-width:1040px">
+        <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);display:flex;flex-wrap:wrap;align-items:baseline;gap:16px;margin-bottom:22px">
+          <span style="font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:700">Project 02</span>
+          <span style="font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:#EDEAE2;font-weight:600">Tartus · Opening this month</span>
+        </div>
+        <h2 data-reveal data-d="120" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2.8rem,10vw,6.5rem);line-height:.96;letter-spacing:-.03em;color:#F7F5EF">WAVES<span style="color:{{ accent }}">.</span></h2>
+        <p data-reveal data-d="240" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:22px;max-width:600px;font-size:clamp(1rem,3.4vw,1.2rem);line-height:1.6;color:#D7D2C6;font-weight:400">A waterfront destination on the Tartus shore. Vintage food-truck kitchens, pergola-shaded terraces and lantern-lit paths, right where the sand meets the sea.</p>
+      </div>
+    </div>
+
+    <!-- WAVES detail -->
+    <div style="padding:clamp(48px,8vw,90px) clamp(20px,5vw,64px)">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="display:flex;flex-wrap:wrap;gap:clamp(28px,6vw,70px);justify-content:space-between">
+          <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);max-width:600px">
+            <div style="font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:20px">Waterfront by ROX</div>
+            <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.7rem,4.6vw,2.9rem);line-height:1.12;letter-spacing:-.02em;color:#F7F5EF;text-wrap:balance">Shops, patios and the sea at sunset.</h3>
+            <p style="margin-top:22px;font-size:clamp(1rem,2.4vw,1.18rem);line-height:1.7;color:#B7B2A6">WAVES is a patio-style shoreline experience: curated food and drink caravans, open-air seating on white river stone, and warm light that carries from golden hour into the night.</p>
+          </div>
+          <!-- phase status -->
+          <div data-reveal data-d="140" style="opacity:0;transform:translateY(24px);filter:blur(7px);min-width:min(100%,300px);flex:1;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-radius:14px;border:1px solid rgba(201,162,74,.4);background:rgba(201,162,74,.08)">
+              <div><div style="font-family:'Sora',sans-serif;font-weight:700;color:#F7F5EF;font-size:1.05rem">Phase 1</div><div style="font-size:.86rem;color:#B7B2A6;margin-top:2px">Waterfront shops &amp; patios</div></div>
+              <span style="flex:none;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#0B0B0C;background:{{ accent }};padding:7px 12px;border-radius:100px">Opening now</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03)">
+              <div><div style="font-family:'Sora',sans-serif;font-weight:700;color:#EDEAE2;font-size:1.05rem">Phase 2</div><div style="font-size:.86rem;color:#8C877B;margin-top:2px">Expanded promenade</div></div>
+              <span style="flex:none;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:#8C877B;border:1px solid rgba(255,255,255,.16);padding:6px 12px;border-radius:100px">Coming soon</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03)">
+              <div><div style="font-family:'Sora',sans-serif;font-weight:700;color:#EDEAE2;font-size:1.05rem">Phase 3</div><div style="font-size:.86rem;color:#8C877B;margin-top:2px">Full destination</div></div>
+              <span style="flex:none;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:#8C877B;border:1px solid rgba(255,255,255,.16);padding:6px 12px;border-radius:100px">Coming soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WAVES GALLERY -->
+    <div style="padding:0 0 clamp(64px,10vw,120px)">
+      <div style="padding:0 clamp(20px,5vw,64px);max-width:1240px;margin:0 auto 34px">
+        <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:14px">First look — WAVES</div>
+        <h3 data-reveal data-d="120" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.6rem,4.6vw,2.8rem);letter-spacing:-.02em;color:#F7F5EF">Golden hour on the shore.</h3>
+      </div>
+      <div class="rox-scroll" style="display:flex;gap:16px;overflow-x:auto;padding:6px clamp(20px,5vw,64px) 20px;scroll-snap-type:x mandatory">
+        <sc-for list="{{ wavesGallery }}" as="w" hint-placeholder-count="6">
+          <div style="flex:none;width:min(84vw,600px);aspect-ratio:16/10;border-radius:16px;overflow:hidden;scroll-snap-align:center;background-color:#161618;background-image:url('{{ w }}');background-size:cover;background-position:center"></div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= F&B PARTNERS ================= -->
+  <section id="partners" style="padding:clamp(72px,12vw,150px) clamp(20px,5vw,64px);border-top:1px solid rgba(255,255,255,.06);scroll-margin-top:70px">
+    <div style="max-width:900px;margin:0 auto;text-align:center">
+      <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:24px">For food &amp; beverage brands</div>
+      <h2 data-reveal data-d="110" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2rem,6.5vw,4rem);line-height:1.04;letter-spacing:-.025em;color:#F7F5EF;text-wrap:balance">Bring your brand to Syria.</h2>
+      <p data-reveal data-d="220" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:22px;font-size:clamp(1.02rem,2.6vw,1.22rem);line-height:1.7;color:#B7B2A6;max-width:660px;margin-left:auto;margin-right:auto">ROX represents food and beverage brands and brings them into its destinations across Syria, from waterfront kitchens at WAVES to flagship spaces at ROX Park. If you want to expand into the market, we would love to talk.</p>
+      <div data-reveal data-d="330" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:36px">
+        <a class="rox-cta" href="mailto:partners@rox9park.com?subject=F%26B%20partnership%20with%20ROX" style="display:inline-block;background:{{ accent }};color:#0B0B0C;font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.01em;padding:18px 40px;border-radius:100px;transition:transform .25s,box-shadow .25s">Partner with us</a>
+        <div style="margin-top:16px;font-size:.9rem;color:#8C877B">Or email <a href="mailto:partners@rox9park.com">partners@rox9park.com</a></div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer id="contact" style="padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px) 40px;border-top:1px solid rgba(255,255,255,.08);background:#080809;scroll-margin-top:80px">
+  <footer id="contact" style="padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px) 40px;border-top:1px solid rgba(255,255,255,.08);background:#080809;scroll-margin-top:70px">
     <div style="max-width:1240px;margin:0 auto">
       <div style="display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start">
-        <div style="max-width:340px">
-          <img src="assets/rox9-logo-white.png" alt="ROX9 Park" style="height:40px;width:auto;display:block;margin-bottom:20px">
-          <p style="font-size:.92rem;color:#8C877B;line-height:1.6">A mixed-use destination for retail, dining and entertainment. Opening {{ launchLabel }}.</p>
+        <div style="max-width:360px">
+          <img src="assets/rox9-logo-white.png" alt="ROX" style="height:40px;width:auto;display:block;margin-bottom:20px">
+          <p style="font-size:.92rem;color:#8C877B;line-height:1.6">Destinations built around Return on Xperience. ROX Park opening {{ launchLabel }}. WAVES opening this month in Tartus.</p>
         </div>
-        <div style="display:flex;gap:clamp(40px,8vw,90px);flex-wrap:wrap">
+        <div style="display:flex;gap:clamp(36px,7vw,80px);flex-wrap:wrap">
+          <div>
+            <div style="font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:#6E6A60;font-weight:600;margin-bottom:16px">Projects</div>
+            <div style="display:flex;flex-direction:column;gap:12px;font-size:.95rem;color:#C7C2B6">
+              <a href="#rox-park">ROX Park</a>
+              <a href="#waves">WAVES · Tartus</a>
+              <a href="#partners">Partner with us</a>
+            </div>
+          </div>
           <div>
             <div style="font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:#6E6A60;font-weight:600;margin-bottom:16px">Contact</div>
             <div style="display:flex;flex-direction:column;gap:12px;font-size:.95rem;color:#C7C2B6">
               <a href="https://www.rox9park.com">www.rox9park.com</a>
+              <a href="mailto:partners@rox9park.com">partners@rox9park.com</a>
               <a href="tel:+00000000000">+00 000 000 0000</a>
-              <span>General enquiries</span>
             </div>
           </div>
           <div>
@@ -186,18 +258,17 @@
             <div style="display:flex;flex-direction:column;gap:12px;font-size:.95rem;color:#C7C2B6">
               <a href="#">Instagram</a>
               <a href="#">LinkedIn</a>
-              <a href="#">Newsletter</a>
             </div>
           </div>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:20px;margin:48px 0 24px">
         <span style="flex:1;height:1px;background:rgba(255,255,255,.1)"></span>
-        <span style="font-family:'Sora',sans-serif;font-weight:600;letter-spacing:.3em;color:#9C978B;font-size:.8rem">ROX&nbsp;&nbsp;PARK</span>
+        <span style="font-family:'Sora',sans-serif;font-weight:600;letter-spacing:.3em;color:#9C978B;font-size:.8rem">ROX</span>
         <span style="flex:1;height:1px;background:rgba(255,255,255,.1)"></span>
       </div>
-      <div style="text-align:center;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:#5C584F;font-weight:600">Retail · Dining · Entertainment</div>
-      <div style="text-align:center;font-size:.78rem;color:#4E4B44;margin-top:22px">© {{ launchYear }} ROX9 Park. All rights reserved.</div>
+      <div style="text-align:center;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:#5C584F;font-weight:600">Return on Xperience</div>
+      <div style="text-align:center;font-size:.78rem;color:#4E4B44;margin-top:22px">© {{ launchYear }} ROX. All rights reserved.</div>
     </div>
   </footer>
 
@@ -211,7 +282,6 @@ class Component extends DCLogic {
     this.tick();
     this._t = setInterval(()=>this.tick(), 1000);
 
-    // scroll reveal (opacity + lift + de-blur, with stagger)
     const els = Array.from(document.querySelectorAll('[data-reveal]'));
     if('IntersectionObserver' in window){
       const io = new IntersectionObserver((ents)=>{
@@ -229,7 +299,6 @@ class Component extends DCLogic {
       els.forEach(el=>io.observe(el));
     } else { els.forEach(el=>{el.style.opacity='1';el.style.transform='none';el.style.filter='none';}); }
 
-    // header bg on scroll
     this._hdr = document.getElementById('rox-header');
     this._onScroll = ()=>{ if(!this._hdr) return;
       if(window.scrollY>40){ this._hdr.style.background='rgba(11,11,12,.85)'; this._hdr.style.backdropFilter='blur(14px)'; this._hdr.style.webkitBackdropFilter='blur(14px)'; this._hdr.style.borderBottomColor='rgba(255,255,255,.08)'; this._hdr.style.padding='12px clamp(20px,5vw,64px)'; }
@@ -237,7 +306,6 @@ class Component extends DCLogic {
     };
     window.addEventListener('scroll', this._onScroll, {passive:true});
 
-    // category image zoom on hover
     document.querySelectorAll('.rox-cat-img').forEach(img=>{
       const p=img.parentElement;
       p.addEventListener('mouseenter',()=>img.style.transform='scale(1.06)');
@@ -297,15 +365,11 @@ class Component extends DCLogic {
 
   renderVals(){
     const accent = this.props.accent ?? '#C9A24A';
-    const imgMap = { dusk:'assets/hero-dusk.png', entrance:'assets/entrance.png', storefront:'assets/storefront.png', plaza:'assets/plaza.png' };
-    const heroImg = imgMap[this.props.heroImage] || imgMap.dusk;
     const launchYear = new Date(this.props.launchDate ?? '2027-06-21T10:00:00').getFullYear();
     const launchLabel = 'Summer ' + launchYear;
     const cd = this.state.cd;
-    const btnOver = (e)=>{ e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.boxShadow='0 12px 30px -8px rgba(201,162,74,.5)'; };
-    const btnOut = (e)=>{ e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='none'; };
     return {
-      accent, heroImg, launchYear, launchLabel,
+      accent, launchYear, launchLabel,
       showCountdown: this.props.showCountdown ?? true,
       countdownUnits: [
         {value:cd.d, label:'Days'},
@@ -314,13 +378,13 @@ class Component extends DCLogic {
         {value:cd.s, label:'Seconds'},
       ],
       categories: [
-        {img:'assets/storefront.png', tag:'Retail', title:'Shop', desc:'Curated brands in a design-led village.'},
-        {img:'assets/plaza.png', tag:'Dining', title:'Eat & Drink', desc:'Chef-driven kitchens and open-air terraces.'},
-        {img:'assets/entrance.png', tag:'Entertainment', title:'Gather', desc:'Culture, events and evenings out.'},
-        {img:'assets/hero-dusk.png', tag:'Live · Work', title:'Stay', desc:'Residences and workspace, woven in.'},
+        {img:'assets/storefront.jpg', tag:'Retail', title:'Shop', desc:'Curated brands in a design-led village.'},
+        {img:'assets/plaza.jpg', tag:'Dining', title:'Eat & Drink', desc:'Chef-driven kitchens and open-air terraces.'},
+        {img:'assets/entrance.jpg', tag:'Entertainment', title:'Gather', desc:'Culture, events and evenings out.'},
+        {img:'assets/hero-dusk.jpg', tag:'Live · Work', title:'Stay', desc:'Residences and workspace, woven in.'},
       ],
-      gallery: ['assets/hero-dusk.png','assets/plaza.png','assets/storefront.png','assets/entrance.png'],
-      btnOver, btnOut,
+      gallery: ['assets/hero-dusk.jpg','assets/plaza.jpg','assets/storefront.jpg','assets/entrance.jpg'],
+      wavesGallery: ['assets/waves-sunset.jpg','assets/waves-boardwalk.jpg','assets/waves-market.jpg','assets/waves-trucks.jpg','assets/waves-night.jpg','assets/waves-amenities.jpg'],
     };
   }
 }
