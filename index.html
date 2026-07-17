@@ -31,8 +31,7 @@
   <header id="rox-header" style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);transition:background .4s ease,padding .4s ease,border-color .4s ease;border-bottom:1px solid rgba(255,255,255,0)">
     <img src="assets/rox9-logo-gold.png" alt="ROX9 Park" style="height:clamp(30px,5vw,40px);width:auto;display:block">
     <div style="display:flex;align-items:center;gap:20px">
-      <span style="font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#8C877B;font-weight:600;display:none" class="rox-openpill">Opening {{ launchYear }}</span>
-      <a href="#rox-register" style="font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:#0B0B0C;background:{{ accent }};padding:11px 20px;border-radius:100px;transition:transform .3s,box-shadow .3s" onMouseOver="{{ btnOver }}" onMouseOut="{{ btnOut }}">Join the list</a>
+      <span style="font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:{{ accent }};font-weight:600;display:inline-block" class="rox-openpill">Opening {{ launchYear }}</span>
     </div>
   </header>
 
@@ -51,21 +50,9 @@
       <h1 data-reveal style="opacity:0;transform:translateY(24px);font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2.6rem,8.5vw,6rem);line-height:.98;letter-spacing:-.025em;color:#F7F5EF;text-wrap:balance">Something<br>extraordinary is<br>taking shape.</h1>
       <p data-reveal style="opacity:0;transform:translateY(24px);margin-top:26px;max-width:560px;font-size:clamp(1rem,3.4vw,1.2rem);line-height:1.6;color:#C7C2B6;font-weight:400">A new mixed-use destination where retail, dining, entertainment, living and workspace come together around a single idea — <span style="color:#EDEAE2;font-weight:600">Return on eXperience.</span></p>
 
-      <div id="rox-register" data-reveal style="opacity:0;transform:translateY(24px);margin-top:38px;max-width:520px;scroll-margin-top:120px">
-        <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;border:1px solid rgba(201,162,74,.4);background:rgba(201,162,74,.08);border-radius:14px">
-            <span style="flex:none;width:30px;height:30px;border-radius:50%;background:{{ accent }};color:#0B0B0C;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem">✓</span>
-            <div><div style="font-family:'Sora',sans-serif;font-weight:600;color:#F7F5EF;font-size:1rem">You're on the list.</div><div style="font-size:.86rem;color:#9C978B;margin-top:2px">We'll be in touch before the doors open.</div></div>
-          </div>
-        </sc-if>
-        <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
-          <div style="font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#8C877B;font-weight:600;margin-bottom:12px">Be first through the doors</div>
-          <form onSubmit="{{ onSubmit }}" style="display:flex;gap:10px;flex-wrap:wrap">
-            <input type="email" required placeholder="Enter your email" value="{{ email }}" onInput="{{ onEmail }}" style="flex:1;min-width:220px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);color:#F7F5EF;font-family:'Manrope',sans-serif;font-size:1rem;padding:16px 18px;border-radius:12px;outline:none" style-focus="border-color:#C9A24A;background:rgba(255,255,255,.08)">
-            <button type="submit" style="flex:none;background:{{ accent }};color:#0B0B0C;font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.01em;padding:16px 28px;border:none;border-radius:12px;cursor:pointer;transition:transform .25s,box-shadow .25s" onMouseOver="{{ btnOver }}" onMouseOut="{{ btnOut }}">Notify me</button>
-          </form>
-          <div style="font-size:.76rem;color:#6E6A60;margin-top:10px">No spam — just one note when we open.</div>
-        </sc-if>
+      <div data-reveal style="opacity:0;transform:translateY(24px);margin-top:38px;display:flex;align-items:center;gap:14px">
+        <span style="width:34px;height:1px;background:{{ accent }}"></span>
+        <span style="font-size:clamp(.62rem,2.4vw,.75rem);letter-spacing:.28em;text-transform:uppercase;color:#8C877B;font-weight:600">Opening {{ launchYear }}</span>
       </div>
     </div>
     <div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;animation:rox-cue 2s ease-in-out infinite">
@@ -134,8 +121,12 @@
   <section style="padding:clamp(72px,12vw,150px) clamp(20px,5vw,64px);border-top:1px solid rgba(255,255,255,.06);text-align:center">
     <div data-reveal style="opacity:0;transform:translateY(24px);max-width:760px;margin:0 auto">
       <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2rem,6.5vw,4rem);line-height:1.04;letter-spacing:-.025em;color:#F7F5EF;text-wrap:balance">Be part of what's next.</h2>
-      <p style="margin-top:20px;font-size:clamp(1rem,2.6vw,1.18rem);color:#B7B2A6;line-height:1.6">Leasing enquiries and launch updates — leave your email and we'll reach out.</p>
-      <a href="#rox-register" style="display:inline-block;margin-top:34px;background:{{ accent }};color:#0B0B0C;font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.01em;padding:18px 40px;border-radius:100px;transition:transform .25s,box-shadow .25s" onMouseOver="{{ btnOver }}" onMouseOut="{{ btnOut }}">Join the list</a>
+      <p style="margin-top:20px;font-size:clamp(1rem,2.6vw,1.18rem);color:#B7B2A6;line-height:1.6">A new mixed-use destination for retail, dining and entertainment. Opening {{ launchYear }}.</p>
+      <div style="display:inline-flex;align-items:center;gap:14px;margin-top:34px">
+        <span style="width:34px;height:1px;background:{{ accent }}"></span>
+        <span style="font-family:'Sora',sans-serif;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:{{ accent }};font-size:.8rem">Return on eXperience</span>
+        <span style="width:34px;height:1px;background:{{ accent }}"></span>
+      </div>
     </div>
   </section>
 
@@ -180,7 +171,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C9A24A&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#C9A24A&quot;,&quot;#B8873A&quot;,&quot;#D8B45E&quot;,&quot;#A8A29A&quot;]},&quot;heroImage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;dusk&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;dusk&quot;,&quot;entrance&quot;,&quot;storefront&quot;,&quot;plaza&quot;]},&quot;showCountdown&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;launchDate&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;2026-12-01T10:00:00&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { email:'', submitted:false, cd:{d:'--',h:'--',m:'--',s:'--'} };
+  state = { cd:{d:'--',h:'--',m:'--',s:'--'} };
 
   componentDidMount(){
     this.tick();
@@ -236,9 +227,6 @@ class Component extends DCLogic {
     return {
       accent, heroImg, launchYear,
       showCountdown: this.props.showCountdown ?? true,
-      email: this.state.email,
-      submitted: this.state.submitted,
-      notSubmitted: !this.state.submitted,
       countdownUnits: [
         {value:cd.d, label:'Days'},
         {value:cd.h, label:'Hours'},
@@ -252,13 +240,6 @@ class Component extends DCLogic {
         {img:'assets/hero-dusk.png', tag:'Live · Work', title:'Stay', desc:'Residences and workspace, woven in.'},
       ],
       gallery: ['assets/hero-dusk.png','assets/plaza.png','assets/storefront.png','assets/entrance.png'],
-      onEmail: (e)=> this.setState({email:e.target.value}),
-      onSubmit: (e)=>{ e.preventDefault();
-        const v=(this.state.email||'').trim();
-        if(!/^\S+@\S+\.\S+$/.test(v)) return;
-        try{ const k='rox9_signups'; const cur=JSON.parse(localStorage.getItem(k)||'[]'); cur.push({email:v,at:Date.now()}); localStorage.setItem(k,JSON.stringify(cur)); }catch(_){}
-        this.setState({submitted:true});
-      },
       btnOver, btnOut,
     };
   }
