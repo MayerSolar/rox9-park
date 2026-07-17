@@ -14,43 +14,80 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  html{-webkit-text-size-adjust:100%}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   body{background:#0B0B0C;color:#EDEAE2;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:#C9A24A;text-decoration:none}
   a:hover{color:#E4C67E}
   ::selection{background:#C9A24A;color:#0B0B0C}
   @keyframes rox-kb{0%{transform:scale(1.08) translateY(0)}100%{transform:scale(1.18) translateY(-2%)}}
   @keyframes rox-cue{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(7px);opacity:1}}
-  @keyframes rox-shimmer{0%{background-position:-140% 0}100%{background-position:240% 0}}
+  @keyframes rox-fd{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes rox-fade{from{opacity:0}to{opacity:1}}
   .rox-scroll::-webkit-scrollbar{height:6px}
   .rox-scroll::-webkit-scrollbar-thumb{background:#2a2a2c;border-radius:20px}
+
+  /* menu button */
+  #rox-logo{opacity:0;animation:rox-fd .9s cubic-bezier(.2,.7,.2,1) .15s forwards}
+  #rox-menu-btn{opacity:0;animation:rox-fade .9s ease .32s forwards}
+  #rox-menu-btn:hover{transform:scale(1.07);border-color:rgba(201,162,74,.6);background:rgba(11,11,12,.65)}
+  .rox-burger{position:relative;width:22px;height:14px;display:block;pointer-events:none}
+  .rox-burger span{position:absolute;left:0;width:100%;height:2px;background:#EDEAE2;border-radius:2px;transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .3s}
+  .rox-burger span:nth-child(1){top:2px}
+  .rox-burger span:nth-child(2){bottom:2px}
+  #rox-menu-btn[data-open="1"] .rox-burger span:nth-child(1){top:6px;transform:rotate(45deg)}
+  #rox-menu-btn[data-open="1"] .rox-burger span:nth-child(2){bottom:6px;transform:rotate(-45deg)}
+
+  /* full-screen menu */
+  .rox-menu-link:hover{color:#E4C67E !important;transform:translateX(10px) !important}
+  .rox-menu-link:hover .rox-menu-num{opacity:1 !important}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  }
 </style>
 </helmet>
 <div style="position:relative;width:100%;overflow:hidden">
 
   <header id="rox-header" style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);transition:background .4s ease,padding .4s ease,border-color .4s ease;border-bottom:1px solid rgba(255,255,255,0)">
-    <img src="assets/rox9-logo-gold.png" alt="ROX9 Park" style="height:clamp(30px,5vw,40px);width:auto;display:block">
-    <div style="display:flex;align-items:center;gap:20px">
-      <span style="font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:{{ accent }};font-weight:600;display:inline-block" class="rox-openpill">Opening {{ launchYear }}</span>
-    </div>
+    <img id="rox-logo" src="assets/rox9-logo-gold.png" alt="ROX9 Park" style="height:clamp(30px,5vw,40px);width:auto;display:block">
   </header>
 
+  <!-- MENU BUTTON -->
+  <button id="rox-menu-btn" type="button" aria-label="Open menu" data-open="0" style="position:fixed;top:clamp(13px,3vw,24px);right:clamp(16px,5vw,58px);z-index:120;width:clamp(46px,11vw,54px);height:clamp(46px,11vw,54px);border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(11,11,12,.45);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s,background .35s">
+    <span class="rox-burger"><span></span><span></span></span>
+  </button>
+
+  <!-- FULL-SCREEN MENU -->
+  <div id="rox-menu" style="position:fixed;inset:0;z-index:110;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .55s cubic-bezier(.2,.7,.2,1);background:rgba(9,9,10,.94);backdrop-filter:blur(22px) saturate(120%);-webkit-backdrop-filter:blur(22px) saturate(120%);display:flex;flex-direction:column;justify-content:center;gap:clamp(30px,6vh,58px);padding:clamp(96px,14vh,140px) clamp(28px,7vw,90px) clamp(40px,7vh,70px)">
+    <nav style="display:flex;flex-direction:column;gap:clamp(4px,1.1vh,10px);width:100%;max-width:1180px;margin:0 auto">
+      <a class="rox-menu-link" href="#top" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.1rem,9vw,4.8rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">01</span>Home</a>
+      <a class="rox-menu-link" href="#idea" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.1rem,9vw,4.8rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">02</span>The Idea</a>
+      <a class="rox-menu-link" href="#explore" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.1rem,9vw,4.8rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">03</span>Explore</a>
+      <a class="rox-menu-link" href="#gallery" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.1rem,9vw,4.8rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">04</span>First Look</a>
+      <a class="rox-menu-link" href="#contact" style="opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),color .3s;display:flex;align-items:baseline;gap:clamp(14px,4vw,34px);width:fit-content;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.1rem,9vw,4.8rem);line-height:1.06;letter-spacing:-.02em;color:#F7F5EF"><span class="rox-menu-num" style="font-family:'Manrope',sans-serif;font-size:clamp(.68rem,2vw,.92rem);font-weight:600;letter-spacing:.16em;color:{{ accent }};opacity:.6;transition:opacity .3s;transform:translateY(-.5em)">05</span>Contact</a>
+    </nav>
+    <div style="width:100%;max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.08);padding-top:clamp(20px,4vh,32px)">
+      <span style="font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:{{ accent }};font-weight:600">Opening {{ launchYear }}</span>
+      <a href="https://www.rox9park.com" style="font-size:.92rem;color:#C7C2B6;letter-spacing:.02em">www.rox9park.com</a>
+    </div>
+  </div>
+
   <!-- HERO -->
-  <section style="position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(96px,16vh,150px) clamp(20px,5vw,64px) clamp(40px,7vh,80px)">
+  <section id="top" style="position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(96px,16vh,150px) clamp(20px,5vw,64px) clamp(40px,7vh,80px);scroll-margin-top:0">
     <div style="position:absolute;inset:0;z-index:0;overflow:hidden">
       <div style="position:absolute;inset:0;background-image:url('{{ heroImg }}');background-size:cover;background-position:center;animation:rox-kb 22s ease-in-out infinite alternate"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.55) 0%,rgba(11,11,12,.15) 32%,rgba(11,11,12,.55) 62%,rgba(11,11,12,.96) 100%)"></div>
       <div style="position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 20%,transparent 40%,rgba(11,11,12,.5) 100%)"></div>
     </div>
     <div style="position:relative;z-index:2;max-width:1000px">
-      <div data-reveal style="opacity:0;transform:translateY(24px);display:flex;align-items:center;gap:14px;margin-bottom:26px">
+      <div data-reveal data-d="80" style="opacity:0;transform:translateY(24px);filter:blur(7px);display:flex;align-items:center;gap:14px;margin-bottom:26px">
         <span style="width:34px;height:1px;background:{{ accent }}"></span>
         <span style="font-size:clamp(.62rem,2.4vw,.75rem);letter-spacing:.34em;text-transform:uppercase;color:{{ accent }};font-weight:600">Retail · Dining · Entertainment</span>
       </div>
-      <h1 data-reveal style="opacity:0;transform:translateY(24px);font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2.6rem,8.5vw,6rem);line-height:.98;letter-spacing:-.025em;color:#F7F5EF;text-wrap:balance">Something<br>extraordinary is<br>taking shape.</h1>
-      <p data-reveal style="opacity:0;transform:translateY(24px);margin-top:26px;max-width:560px;font-size:clamp(1rem,3.4vw,1.2rem);line-height:1.6;color:#C7C2B6;font-weight:400">A new mixed-use destination where retail, dining, entertainment, living and workspace come together around a single idea — <span style="color:#EDEAE2;font-weight:600">Return on eXperience.</span></p>
-
-      <div data-reveal style="opacity:0;transform:translateY(24px);margin-top:38px;display:flex;align-items:center;gap:14px">
+      <h1 data-reveal data-d="200" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2.6rem,8.5vw,6rem);line-height:.98;letter-spacing:-.025em;color:#F7F5EF;text-wrap:balance">Something<br>extraordinary is<br>taking shape.</h1>
+      <p data-reveal data-d="340" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:26px;max-width:560px;font-size:clamp(1rem,3.4vw,1.2rem);line-height:1.6;color:#C7C2B6;font-weight:400">A new mixed-use destination where retail, dining, entertainment, living and workspace all come together around one simple idea. <span style="color:#EDEAE2;font-weight:600">Return on eXperience.</span></p>
+      <div data-reveal data-d="460" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:38px;display:flex;align-items:center;gap:14px">
         <span style="width:34px;height:1px;background:{{ accent }}"></span>
         <span style="font-size:clamp(.62rem,2.4vw,.75rem);letter-spacing:.28em;text-transform:uppercase;color:#8C877B;font-weight:600">Opening {{ launchYear }}</span>
       </div>
@@ -61,10 +98,10 @@
     </div>
   </section>
 
-  <!-- COUNTDOWN + CONCEPT -->
+  <!-- COUNTDOWN -->
   <sc-if value="{{ showCountdown }}" hint-placeholder-val="{{ true }}">
   <section style="padding:clamp(56px,9vw,96px) clamp(20px,5vw,64px);border-top:1px solid rgba(255,255,255,.06)">
-    <div data-reveal style="opacity:0;transform:translateY(24px);max-width:1120px;margin:0 auto;text-align:center">
+    <div data-reveal style="opacity:0;transform:translateY(24px);filter:blur(7px);max-width:1120px;margin:0 auto;text-align:center">
       <div style="font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:28px">Opening {{ launchYear }}</div>
       <div style="display:flex;justify-content:center;gap:clamp(18px,6vw,64px)">
         <sc-for list="{{ countdownUnits }}" as="u" hint-placeholder-count="4">
@@ -79,19 +116,19 @@
   </sc-if>
 
   <!-- MANIFESTO -->
-  <section style="padding:clamp(64px,11vw,140px) clamp(20px,5vw,64px);border-top:1px solid rgba(255,255,255,.06)">
+  <section id="idea" style="padding:clamp(64px,11vw,140px) clamp(20px,5vw,64px);border-top:1px solid rgba(255,255,255,.06);scroll-margin-top:80px">
     <div style="max-width:920px;margin:0 auto">
-      <div data-reveal style="opacity:0;transform:translateY(24px);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:30px">The idea</div>
-      <h2 data-reveal style="opacity:0;transform:translateY(24px);font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.8rem,5.4vw,3.4rem);line-height:1.12;letter-spacing:-.02em;color:#F7F5EF;text-wrap:balance">Return on <span style="color:{{ accent }}">eXperience.</span> A place designed around the moments people actually remember.</h2>
-      <p data-reveal style="opacity:0;transform:translateY(24px);margin-top:28px;font-size:clamp(1.02rem,2.6vw,1.25rem);line-height:1.7;color:#B7B2A6;max-width:680px">ROX9 Park brings together curated retail, chef-driven dining, culture and entertainment, alongside living and workspace — a walkable, design-led neighborhood built to be lived in, not just visited.</p>
+      <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:30px">The idea</div>
+      <h2 data-reveal data-d="120" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.8rem,5.4vw,3.4rem);line-height:1.12;letter-spacing:-.02em;color:#F7F5EF;text-wrap:balance">Return on <span style="color:{{ accent }}">eXperience.</span> A place designed around the moments people actually remember.</h2>
+      <p data-reveal data-d="240" style="opacity:0;transform:translateY(24px);filter:blur(7px);margin-top:28px;font-size:clamp(1.02rem,2.6vw,1.25rem);line-height:1.7;color:#B7B2A6;max-width:680px">ROX9 Park brings together curated retail, chef-driven dining, culture and entertainment, alongside living and workspace. A walkable, design-led neighborhood built to be lived in, not just visited.</p>
     </div>
   </section>
 
   <!-- CATEGORIES -->
-  <section style="padding:0 clamp(20px,5vw,64px) clamp(64px,10vw,120px)">
+  <section id="explore" style="padding:0 clamp(20px,5vw,64px) clamp(64px,10vw,120px);scroll-margin-top:80px">
     <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(14px,2vw,22px)">
       <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="4">
-        <div data-reveal style="opacity:0;transform:translateY(24px);position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;cursor:default">
+        <div data-reveal style="opacity:0;transform:translateY(24px);filter:blur(7px);position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;cursor:default">
           <div style="position:absolute;inset:0;background-image:url('{{ cat.img }}');background-size:cover;background-position:center;transition:transform .9s cubic-bezier(.2,.7,.2,1)" class="rox-cat-img"></div>
           <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.1) 30%,rgba(11,11,12,.85) 100%)"></div>
           <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
@@ -105,10 +142,10 @@
   </section>
 
   <!-- GALLERY -->
-  <section style="padding:clamp(56px,9vw,110px) 0;border-top:1px solid rgba(255,255,255,.06)">
+  <section id="gallery" style="padding:clamp(56px,9vw,110px) 0;border-top:1px solid rgba(255,255,255,.06);scroll-margin-top:80px">
     <div style="padding:0 clamp(20px,5vw,64px);max-width:1240px;margin:0 auto 34px">
-      <div data-reveal style="opacity:0;transform:translateY(24px);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:14px">First look</div>
-      <h2 data-reveal style="opacity:0;transform:translateY(24px);font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.6rem,4.6vw,2.8rem);letter-spacing:-.02em;color:#F7F5EF">A glimpse of what's coming.</h2>
+      <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:{{ accent }};font-weight:600;margin-bottom:14px">First look</div>
+      <h2 data-reveal data-d="120" style="opacity:0;transform:translateY(24px);filter:blur(7px);font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.6rem,4.6vw,2.8rem);letter-spacing:-.02em;color:#F7F5EF">A glimpse of what is coming.</h2>
     </div>
     <div class="rox-scroll" style="display:flex;gap:16px;overflow-x:auto;padding:6px clamp(20px,5vw,64px) 20px;scroll-snap-type:x mandatory">
       <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4">
@@ -119,8 +156,8 @@
 
   <!-- FINAL CTA -->
   <section style="padding:clamp(72px,12vw,150px) clamp(20px,5vw,64px);border-top:1px solid rgba(255,255,255,.06);text-align:center">
-    <div data-reveal style="opacity:0;transform:translateY(24px);max-width:760px;margin:0 auto">
-      <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2rem,6.5vw,4rem);line-height:1.04;letter-spacing:-.025em;color:#F7F5EF;text-wrap:balance">Be part of what's next.</h2>
+    <div data-reveal data-d="0" style="opacity:0;transform:translateY(24px);filter:blur(7px);max-width:760px;margin:0 auto">
+      <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2rem,6.5vw,4rem);line-height:1.04;letter-spacing:-.025em;color:#F7F5EF;text-wrap:balance">Be part of what is next.</h2>
       <p style="margin-top:20px;font-size:clamp(1rem,2.6vw,1.18rem);color:#B7B2A6;line-height:1.6">A new mixed-use destination for retail, dining and entertainment. Opening {{ launchYear }}.</p>
       <div style="display:inline-flex;align-items:center;gap:14px;margin-top:34px">
         <span style="width:34px;height:1px;background:{{ accent }}"></span>
@@ -131,7 +168,7 @@
   </section>
 
   <!-- FOOTER -->
-  <footer style="padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px) 40px;border-top:1px solid rgba(255,255,255,.08);background:#080809">
+  <footer id="contact" style="padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px) 40px;border-top:1px solid rgba(255,255,255,.08);background:#080809;scroll-margin-top:80px">
     <div style="max-width:1240px;margin:0 auto">
       <div style="display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start">
         <div style="max-width:340px">
@@ -176,19 +213,25 @@ class Component extends DCLogic {
   componentDidMount(){
     this.tick();
     this._t = setInterval(()=>this.tick(), 1000);
-    // scroll reveal
+
+    // scroll reveal (opacity + lift + de-blur, with stagger)
     const els = Array.from(document.querySelectorAll('[data-reveal]'));
     if('IntersectionObserver' in window){
       const io = new IntersectionObserver((ents)=>{
-        ents.forEach((e,i)=>{ if(e.isIntersecting){
+        ents.forEach((e)=>{ if(e.isIntersecting){
           const el=e.target;
-          el.style.transition='opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1)';
-          el.style.opacity='1'; el.style.transform='translateY(0)';
+          const explicit = el.getAttribute('data-d');
+          const idx = Array.prototype.indexOf.call(el.parentElement.children, el);
+          const delay = explicit!=null ? +explicit : Math.min(idx*80, 480);
+          el.style.transition='opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1), filter 1s cubic-bezier(.2,.7,.2,1)';
+          el.style.transitionDelay=delay+'ms';
+          el.style.opacity='1'; el.style.transform='translateY(0)'; el.style.filter='none';
           io.unobserve(el);
         }});
       },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
       els.forEach(el=>io.observe(el));
-    } else { els.forEach(el=>{el.style.opacity='1';el.style.transform='none';}); }
+    } else { els.forEach(el=>{el.style.opacity='1';el.style.transform='none';el.style.filter='none';}); }
+
     // header bg on scroll
     this._hdr = document.getElementById('rox-header');
     this._onScroll = ()=>{ if(!this._hdr) return;
@@ -196,14 +239,53 @@ class Component extends DCLogic {
       else { this._hdr.style.background='rgba(11,11,12,0)'; this._hdr.style.backdropFilter='none'; this._hdr.style.borderBottomColor='rgba(255,255,255,0)'; this._hdr.style.padding='18px clamp(20px,5vw,64px)'; }
     };
     window.addEventListener('scroll', this._onScroll, {passive:true});
-    // hover-cat images (delegate)
+
+    // category image zoom on hover
     document.querySelectorAll('.rox-cat-img').forEach(img=>{
       const p=img.parentElement;
       p.addEventListener('mouseenter',()=>img.style.transform='scale(1.06)');
       p.addEventListener('mouseleave',()=>img.style.transform='scale(1)');
     });
+
+    // full-screen menu
+    const btn=document.getElementById('rox-menu-btn');
+    const overlay=document.getElementById('rox-menu');
+    if(btn && overlay){
+      const links=Array.prototype.slice.call(overlay.querySelectorAll('.rox-menu-link'));
+      let open=false; let resetT=null;
+      const apply=(v)=>{
+        open=v;
+        btn.setAttribute('data-open', v?'1':'0');
+        btn.setAttribute('aria-label', v?'Close menu':'Open menu');
+        if(v){
+          overlay.style.visibility='visible';
+          overlay.style.pointerEvents='auto';
+          overlay.style.opacity='1';
+          document.body.style.overflow='hidden';
+          links.forEach((l,i)=>{ l.style.transitionDelay=(140+i*70)+'ms'; l.style.opacity='1'; l.style.transform='translateY(0)'; });
+          clearTimeout(resetT);
+          resetT=setTimeout(()=>links.forEach(l=>l.style.transitionDelay='0ms'), 140+links.length*70+420);
+        } else {
+          overlay.style.opacity='0';
+          overlay.style.pointerEvents='none';
+          document.body.style.overflow='';
+          links.forEach((l)=>{ l.style.transitionDelay='0ms'; l.style.opacity='0'; l.style.transform='translateY(22px)'; });
+          clearTimeout(resetT);
+          resetT=setTimeout(()=>{ if(!open) overlay.style.visibility='hidden'; }, 560);
+        }
+      };
+      this._menuApply = apply;
+      btn.addEventListener('click', ()=>apply(!open));
+      links.forEach(l=> l.addEventListener('click', ()=>apply(false)));
+      this._onKey = (e)=>{ if(e.key==='Escape' && open) apply(false); };
+      document.addEventListener('keydown', this._onKey);
+    }
   }
-  componentWillUnmount(){ clearInterval(this._t); window.removeEventListener('scroll', this._onScroll); }
+  componentWillUnmount(){
+    clearInterval(this._t);
+    window.removeEventListener('scroll', this._onScroll);
+    if(this._onKey) document.removeEventListener('keydown', this._onKey);
+  }
 
   pad(n){ return String(n).padStart(2,'0'); }
   tick(){
