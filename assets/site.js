@@ -100,14 +100,40 @@
           if (lab) lab.textContent = v.muted ? 'Sound' : 'Mute';
         });
       }
+      function showRotate() {
+        if (window.innerWidth >= window.innerHeight) return;   /* already landscape */
+        var h = stage.querySelector('.rotate-hint');
+        if (!h) { h = document.createElement('div'); h.className = 'rotate-hint'; h.textContent = '↻  Rotate your phone for full view'; stage.appendChild(h); }
+        h.classList.add('show');
+        clearTimeout(h._t); h._t = setTimeout(function () { h.classList.remove('show'); }, 3500);
+      }
+      function lockLandscape() {
+        if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').then(function () {}).catch(showRotate);
+        } else { showRotate(); }
+      }
       if (fBtn) {
         fBtn.addEventListener('click', function () {
           v.muted = false;
-          if (v.requestFullscreen) v.requestFullscreen();
-          else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();  /* iOS */
-          else if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
           var q = v.play(); if (q && q.catch) q.catch(function () {});
+          if (stage.requestFullscreen) {
+            var p = stage.requestFullscreen();
+            if (p && p.then) p.then(lockLandscape).catch(function () {}); else lockLandscape();
+          } else if (stage.webkitRequestFullscreen) {
+            stage.webkitRequestFullscreen(); lockLandscape();
+          } else if (v.webkitEnterFullscreen) {
+            v.webkitEnterFullscreen();   /* iOS: native player rotates to landscape, no crop */
+          }
         });
+        var onFs = function () {
+          var fs = document.fullscreenElement || document.webkitFullscreenElement;
+          if (!fs) {
+            if (screen.orientation && screen.orientation.unlock) { try { screen.orientation.unlock(); } catch (e) {} }
+            var h = stage.querySelector('.rotate-hint'); if (h) h.classList.remove('show');
+          }
+        };
+        document.addEventListener('fullscreenchange', onFs);
+        document.addEventListener('webkitfullscreenchange', onFs);
       }
     }
   }
