@@ -53,6 +53,7 @@ h1,h2,h3{font-family:var(--sora);color:var(--heading);letter-spacing:-.02em;line
 .menu.open .menu-link:nth-child(2){transition-delay:.19s}
 .menu.open .menu-link:nth-child(3){transition-delay:.26s}
 .menu.open .menu-link:nth-child(4){transition-delay:.33s}
+.menu.open .menu-link:nth-child(5){transition-delay:.40s}
 .menu-link:hover{color:var(--gold2);transform:translateX(9px)}
 .menu-link .num{font-family:var(--manrope);font-size:clamp(.68rem,2vw,.9rem);font-weight:600;letter-spacing:.16em;color:var(--gold);opacity:.6;transform:translateY(-.5em)}
 .menu-foot{display:flex;flex-wrap:wrap;gap:16px 22px;justify-content:space-between;align-items:center;max-width:var(--maxw);width:100%;margin:0 auto;border-top:1px solid var(--line);padding-top:clamp(18px,4vh,30px)}
@@ -155,6 +156,15 @@ video:-webkit-full-screen{object-fit:contain}
 .btn-ghost{border:1px solid rgba(255,255,255,.2);color:var(--text)}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold2);transform:translateY(-2px)}
 
+/* F&B opportunities */
+.opps{display:grid;grid-template-columns:1fr;gap:16px;margin-top:clamp(28px,4vw,44px)}
+.opp{border:1px solid var(--line);background:rgba(255,255,255,.02);border-radius:18px;padding:clamp(26px,5vw,40px);display:flex;flex-direction:column;transition:border-color .3s,background .3s}
+.opp:hover{border-color:rgba(201,162,74,.45);background:rgba(201,162,74,.04)}
+.opp .tag{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:15px}
+.opp h3{font-family:var(--sora);font-weight:700;font-size:clamp(1.5rem,4.6vw,2.1rem);color:var(--heading);line-height:1.1}
+.opp p{margin-top:14px;color:var(--muted);font-size:clamp(.95rem,2.4vw,1.05rem);line-height:1.65;flex:1}
+.opp .cta-row{margin-top:24px}
+
 /* footer */
 .foot{padding:clamp(48px,7vw,80px) var(--pad) 40px;border-top:1px solid var(--line);background:var(--bg2)}
 .foot-top{display:flex;flex-direction:column;gap:36px}
@@ -186,6 +196,7 @@ video:-webkit-full-screen{object-fit:contain}
   .portal-grid{grid-template-columns:1fr 1fr}
   .pcard{min-height:clamp(460px,68vh,660px)}
   .cats{grid-template-columns:repeat(3,1fr)}
+  .opps{grid-template-columns:1fr 1fr}
   .foot-top{flex-direction:row;justify-content:space-between;align-items:flex-start}
 }
 
