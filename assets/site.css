@@ -96,7 +96,11 @@ h1,h2,h3{font-family:var(--sora);color:var(--heading);letter-spacing:-.02em;line
 .vstage{position:relative;margin-top:clamp(22px,4vh,34px);border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/9}
 .vstage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
 .vstage .poster-note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted2);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:20px}
-.vctrls{position:absolute;bottom:12px;right:12px;display:flex;gap:10px;z-index:2}
+.vctrls{position:absolute;top:12px;right:12px;display:flex;gap:10px;z-index:2}
+.vstage video{cursor:pointer}
+.vplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .3s;z-index:1}
+.vplay.show{opacity:1}
+.vplay .ic{width:70px;height:70px;border-radius:50%;background:rgba(11,11,12,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;color:#fff}
 .vbtn{display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border-radius:100px;border:1px solid rgba(255,255,255,.2);background:rgba(11,11,12,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--text);font-family:var(--manrope);font-size:.78rem;font-weight:600;cursor:pointer;transition:background .25s,border-color .25s}
 .vbtn:hover{background:rgba(201,162,74,.9);color:var(--bg);border-color:transparent}
 .vbtn svg{flex:none}

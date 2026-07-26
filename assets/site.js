@@ -101,9 +101,16 @@
     var sBtn = stage.querySelector('[data-sound]');
     var fBtn = stage.querySelector('[data-full]');
     if (v) {
+      var playIcon = stage.querySelector('.vplay');
       v.muted = true;
       var pr = v.play && v.play();
-      if (pr && pr.catch) pr.catch(function () {});
+      if (pr && pr.catch) pr.catch(function () { if (playIcon) playIcon.classList.add('show'); });
+      v.addEventListener('click', function () {
+        if (v.paused) { var q = v.play(); if (q && q.catch) q.catch(function () {}); }
+        else { v.pause(); }
+      });
+      v.addEventListener('play', function () { if (playIcon) playIcon.classList.remove('show'); });
+      v.addEventListener('pause', function () { if (playIcon) playIcon.classList.add('show'); });
       if (sBtn) {
         var lab = sBtn.querySelector('.slabel');
         sBtn.addEventListener('click', function () {
