@@ -170,6 +170,8 @@ video:-webkit-full-screen{object-fit:contain}
 .opp h3{font-family:var(--sora);font-weight:700;font-size:clamp(1.5rem,4.6vw,2.1rem);color:var(--heading);line-height:1.1}
 .opp p{margin-top:14px;color:var(--muted);font-size:clamp(.95rem,2.4vw,1.05rem);line-height:1.65;flex:1}
 .opp .cta-row{margin-top:24px}
+.opps3{display:grid;grid-template-columns:1fr;gap:16px;margin-top:clamp(28px,4vw,44px)}
+@media(min-width:820px){.opps3{grid-template-columns:repeat(3,1fr)}}
 
 /* footer */
 .foot{padding:clamp(48px,7vw,80px) var(--pad) 40px;border-top:1px solid var(--line);background:var(--bg2)}
