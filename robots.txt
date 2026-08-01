@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rox91.com/sitemap.xml
