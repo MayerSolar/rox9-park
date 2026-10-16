@@ -75,6 +75,9 @@
   function buildList() {
     var byBlock = {};
     unitsFor(floor).forEach(function (u) { (byBlock[u.block] = byBlock[u.block] || []).push(u); });
+    Object.keys(byBlock).forEach(function (bl) {
+      byBlock[bl].sort(function (a, b) { return (parseInt(a.id.slice(1), 10) || 0) - (parseInt(b.id.slice(1), 10) || 0); });
+    });
     var html = '';
     Object.keys(byBlock).sort().forEach(function (bl) {
       var us = byBlock[bl];
