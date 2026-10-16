@@ -8,13 +8,19 @@
   </url>
   <url>
     <loc>https://rox91.com/park/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://rox91.com/park/leasing/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://rox91.com/waves/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
