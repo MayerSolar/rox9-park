@@ -180,20 +180,24 @@
       zoomAt(e.clientX - r.left, e.clientY - r.top, view.s * (e.deltaY < 0 ? 1.12 : 1 / 1.12));
     }, { passive: false });
 
+    // NOTE: we deliberately do NOT setPointerCapture on pointerdown — that would
+    // steal the click from a unit, so a plain tap would never select. We capture
+    // only once a real drag starts, and listen for move/up on window so a drag
+    // keeps working even if the pointer leaves the stage.
+    var captured = false;
     stage.addEventListener('pointerdown', function (e) {
-      stage.setPointerCapture(e.pointerId);
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
-      moved = false;
+      moved = false; captured = false;
       var ids = Object.keys(pointers);
       if (ids.length === 2) {
         var a = pointers[ids[0]], b = pointers[ids[1]];
         pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), s: view.s };
       } else {
-        dragStart = { x: e.clientX, y: e.clientY, tx: view.tx, ty: view.ty };
+        dragStart = { x: e.clientX, y: e.clientY, tx: view.tx, ty: view.ty, id: e.pointerId };
       }
       if (hintEl) hintEl.classList.add('hide');
     });
-    stage.addEventListener('pointermove', function (e) {
+    window.addEventListener('pointermove', function (e) {
       if (!pointers[e.pointerId]) return;
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
       var ids = Object.keys(pointers);
@@ -205,17 +209,21 @@
         moved = true;
       } else if (dragStart) {
         var dx = e.clientX - dragStart.x, dy = e.clientY - dragStart.y;
-        if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
-        view.tx = dragStart.tx + dx; view.ty = dragStart.ty + dy; apply();
+        if (!moved && Math.abs(dx) + Math.abs(dy) > 5) {
+          moved = true; captured = true;
+          try { stage.setPointerCapture(dragStart.id); } catch (err) {}
+        }
+        if (moved) { view.tx = dragStart.tx + dx; view.ty = dragStart.ty + dy; apply(); }
       }
     });
     function up(e) {
       delete pointers[e.pointerId];
+      if (captured) { try { stage.releasePointerCapture(e.pointerId); } catch (err) {} }
       if (Object.keys(pointers).length < 2) pinch = null;
-      if (Object.keys(pointers).length === 0) dragStart = null;
+      if (Object.keys(pointers).length === 0) { dragStart = null; captured = false; }
     }
-    stage.addEventListener('pointerup', up);
-    stage.addEventListener('pointercancel', up);
+    window.addEventListener('pointerup', up);
+    window.addEventListener('pointercancel', up);
     window.addEventListener('resize', function () { apply(); });
   }
 })();
