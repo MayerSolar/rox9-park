@@ -1,0 +1,88 @@
+/* ROX Park — interactive leasing map */
+.lease-hero{padding:calc(clamp(28px,7vw,38px) + 46px) var(--pad) 0}
+.lease-hero .wrap{max-width:var(--maxw);margin:0 auto}
+.lease-stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(22px,4vw,34px)}
+.lstat{flex:1;min-width:120px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);padding:16px 18px}
+.lstat b{display:block;font-family:var(--sora);font-weight:700;color:var(--heading);font-size:clamp(1.5rem,4vw,2.1rem);line-height:1}
+.lstat span{display:block;margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);font-weight:600}
+
+.lease{padding:clamp(28px,5vw,48px) var(--pad) clamp(56px,9vw,110px)}
+.lease .wrap{max-width:var(--maxw);margin:0 auto}
+
+.lease-bar{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;margin-bottom:16px}
+.floor-toggle{display:inline-flex;padding:4px;border:1px solid var(--line);border-radius:100px;background:rgba(255,255,255,.03)}
+.floor-toggle button{appearance:none;border:0;background:none;cursor:pointer;font-family:var(--sora);font-weight:600;font-size:.86rem;color:var(--muted);padding:9px 20px;border-radius:100px;transition:color .25s,background .25s}
+.floor-toggle button.on{color:#0C0C0C;background:linear-gradient(145deg,var(--gold2),var(--gold))}
+.lease-tally{flex:1;min-width:190px;display:flex;align-items:center;gap:14px}
+.lease-tally .pct{font-family:var(--sora);font-weight:600;color:var(--heading);font-size:.95rem;white-space:nowrap}
+.lease-tally .pct b{color:var(--gold)}
+.lease-tally .bar{flex:1;min-width:80px;height:7px;border-radius:100px;background:rgba(255,255,255,.08);overflow:hidden}
+.lease-tally .bar i{display:block;height:100%;border-radius:100px;background:linear-gradient(90deg,var(--gold),var(--gold2));width:0;transition:width 1s cubic-bezier(.2,.7,.2,1)}
+
+.lease-legend{display:flex;flex-wrap:wrap;gap:12px 18px;margin:0 0 14px}
+.lease-legend .lg{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted)}
+.lease-legend .lg i{width:14px;height:14px;border-radius:5px;flex:none}
+.lg.avail i{background:linear-gradient(145deg,var(--gold2),var(--gold))}
+.lg.leased i{background:#1c1c1e;border:1px solid rgba(255,255,255,.12);position:relative}
+.lg.leased i::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C8A970' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/9px no-repeat}
+.lg.soon i{background:transparent;border:1px dashed rgba(200,169,112,.5)}
+
+/* ---- map stage ---- */
+.map-stage{position:relative;width:100%;aspect-ratio:1.0445;max-height:76vh;border-radius:20px;overflow:hidden;background:#0A0A0A;border:1px solid var(--line);box-shadow:inset 0 0 0 1px rgba(200,169,112,.06),0 40px 90px -50px #000;touch-action:none;cursor:grab}
+.map-stage:active{cursor:grabbing}
+.map-world{position:absolute;inset:0;transform-origin:0 0;will-change:transform}
+.map-base{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none;pointer-events:none}
+.hot-layer{position:absolute;inset:0}
+.hot{position:absolute;width:3.5%;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;border-radius:50%;-webkit-tap-highlight-color:transparent}
+.hot::before{content:"";position:absolute;inset:14%;border-radius:7px;border:2px solid transparent;transition:border-color .2s,box-shadow .2s,background .2s}
+.hot:hover::before{border-color:#FFF;background:rgba(255,255,255,.1)}
+.hot.sel::before{border-color:#FFF;box-shadow:0 0 0 3px rgba(255,255,255,.25),0 0 22px rgba(255,255,255,.35);background:rgba(255,255,255,.06);animation:hot-pulse 1.8s ease-in-out infinite}
+@keyframes hot-pulse{0%,100%{box-shadow:0 0 0 3px rgba(255,255,255,.22),0 0 18px rgba(255,255,255,.28)}50%{box-shadow:0 0 0 5px rgba(255,255,255,0),0 0 26px rgba(255,255,255,.4)}}
+.hot.s-leased::after{content:"";position:absolute;inset:26%;border-radius:4px;background:rgba(10,10,10,.72);box-shadow:inset 0 0 0 1px rgba(200,169,112,.35)}
+.hot.s-soon::after{content:"";position:absolute;inset:30%;border-radius:4px;border:1px dashed rgba(200,169,112,.6)}
+.hot.dim{opacity:.18;pointer-events:none}
+
+.map-ui{position:absolute;right:12px;bottom:12px;display:flex;gap:7px;z-index:3}
+.map-ui button{width:40px;height:40px;border-radius:11px;border:1px solid rgba(255,255,255,.16);background:rgba(10,10,10,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--ivory);font-size:1.1rem;font-family:var(--sora);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .25s,background .25s}
+.map-ui button:hover{border-color:var(--gold);color:var(--gold)}
+.map-ui button[data-z="reset"]{width:auto;padding:0 14px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.map-hint{position:absolute;left:12px;bottom:14px;z-index:3;font-size:.68rem;letter-spacing:.06em;color:var(--muted);background:rgba(10,10,10,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:7px 12px;border-radius:100px;border:1px solid rgba(255,255,255,.1);transition:opacity .4s;pointer-events:none}
+.map-hint.hide{opacity:0}
+@media(max-width:640px){.map-hint{display:none}.map-ui button[data-z="reset"]{display:none}}
+.map-floor-tag{position:absolute;left:12px;top:12px;z-index:3;font-family:var(--sora);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--gold);background:rgba(10,10,10,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:7px 13px;border-radius:100px;border:1px solid rgba(200,169,112,.3)}
+
+/* ---- detail ---- */
+.unit-detail{margin-top:16px;min-height:74px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.02);padding:18px 20px;display:flex;flex-direction:column;gap:7px;transition:border-color .3s}
+.unit-detail.on{border-color:rgba(200,169,112,.42)}
+.unit-detail .du-top{display:flex;align-items:center;gap:12px}
+.unit-detail .du{font-family:var(--sora);font-weight:700;color:var(--heading);font-size:1.4rem}
+.unit-detail .dbadge{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:5px 11px;border-radius:100px}
+.dbadge.s-available{color:#0C0C0C;background:linear-gradient(145deg,var(--gold2),var(--gold))}
+.dbadge.s-leased{color:var(--muted2);border:1px solid var(--line)}
+.dbadge.s-soon{color:var(--gold);border:1px solid rgba(200,169,112,.5)}
+.unit-detail .dmeta{color:var(--text);font-size:.98rem}
+.unit-detail .dmeta2{color:var(--muted2);font-size:.86rem}
+.unit-detail .dcta{align-self:flex-start;margin-top:6px}
+.unit-detail .dhint{color:var(--muted2);font-size:.95rem}
+
+/* ---- directory ---- */
+.lease-dir{margin-top:clamp(30px,5vw,48px)}
+.lease-dir h3{font-family:var(--sora);font-weight:700;color:var(--heading);font-size:clamp(1.3rem,3.4vw,1.7rem)}
+.lease-dir .sub{color:var(--muted);font-size:.95rem;margin-top:8px;margin-bottom:22px}
+.lblock{padding:18px 0;border-top:1px solid var(--line)}
+.lblock-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-bottom:14px}
+.lblock-h .lb-name{font-family:var(--sora);font-weight:700;color:var(--heading);font-size:1.02rem}
+.lblock-h .lb-ct{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);font-weight:600}
+.lblock-h .lb-ct b{color:var(--gold)}
+.lchips{display:flex;flex-wrap:wrap;gap:8px}
+.lchip{font-family:var(--sora);font-weight:600;font-size:.82rem;color:#0C0C0C;background:linear-gradient(145deg,var(--gold2),var(--gold));border:0;border-radius:9px;padding:9px 13px;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.lchip:hover{transform:translateY(-2px);box-shadow:0 8px 18px -8px rgba(200,169,112,.6)}
+.lchip.sel{box-shadow:0 0 0 2px var(--heading)}
+.lchip.s-leased{background:#161618;color:var(--muted2);border:1px solid rgba(255,255,255,.08)}
+.lchip.s-soon{background:transparent;color:var(--gold);border:1px dashed rgba(200,169,112,.5)}
+
+.lease-note{margin-top:26px;color:var(--muted2);font-size:.86rem;line-height:1.6;max-width:720px}
+@media(min-width:900px){
+  .lease-grid{display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start}
+  .unit-detail{margin-top:0;position:sticky;top:84px}
+}
