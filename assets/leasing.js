@@ -64,6 +64,8 @@
       b.style.left = (u.x * 100) + '%';
       b.style.top = (u.y * 100) + '%';
       b.setAttribute('aria-label', u.id + ' — ' + LABELS[st]);
+      b.setAttribute('data-uid', u.id);
+      // keyboard (Enter/Space) activation; pointer taps are handled on pointerup
       b.addEventListener('click', function (e) { if (moved) return; e.stopPropagation(); select(u.id); });
       hot.appendChild(b);
       hotspots[u.id] = b;
@@ -184,10 +186,11 @@
     // steal the click from a unit, so a plain tap would never select. We capture
     // only once a real drag starts, and listen for move/up on window so a drag
     // keeps working even if the pointer leaves the stage.
-    var captured = false;
+    var captured = false, downHot = null;
     stage.addEventListener('pointerdown', function (e) {
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
       moved = false; captured = false;
+      downHot = (e.target && e.target.closest) ? e.target.closest('.hot') : null;
       var ids = Object.keys(pointers);
       if (ids.length === 2) {
         var a = pointers[ids[0]], b = pointers[ids[1]];
@@ -220,7 +223,11 @@
       delete pointers[e.pointerId];
       if (captured) { try { stage.releasePointerCapture(e.pointerId); } catch (err) {} }
       if (Object.keys(pointers).length < 2) pinch = null;
-      if (Object.keys(pointers).length === 0) { dragStart = null; captured = false; }
+      if (Object.keys(pointers).length === 0) {
+        // a tap (no drag) that started on a unit selects it — independent of the click event
+        if (!moved && downHot) select(downHot.getAttribute('data-uid'));
+        dragStart = null; captured = false; downHot = null;
+      }
     }
     window.addEventListener('pointerup', up);
     window.addEventListener('pointercancel', up);
